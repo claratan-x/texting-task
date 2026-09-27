@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A 30-second phone texting test from Clara Tan's BrainConnects 2026 poster.">
+<title>Clara's Texting Task</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@600;700&display=swap">
+<style>
+  :root {
+    --bg: #f3f5f8;
+    --surface: #ffffff;
+    --ink: #172234;
+    --muted: #5b6677;
+    --line: #dde2ea;
+    --navy: #2f4a73;
+    --navy-soft: #e5ebf4;
+    --gold: #e0ab28;
+    --gold-soft: #fbeec7;
+    --gold-ink: #6b4a00;
+    --on-navy: #ffffff;
+    --shadow: 0 1px 2px rgba(23, 34, 52, .06), 0 8px 24px rgba(23, 34, 52, .06);
+    --display: "Sora", "Segoe UI", system-ui, sans-serif;
+    --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0f141c; --surface: #171e2a; --ink: #e7ecf3; --muted: #9ba7b9; --line: #2a3446;
+      --navy: #93b2e6; --navy-soft: #1f2a3d; --gold: #f0c14e; --gold-soft: #3a3020; --gold-ink: #f6d98a;
+      --on-navy: #0f141c; --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f141c; --surface: #171e2a; --ink: #e7ecf3; --muted: #9ba7b9; --line: #2a3446;
+    --navy: #93b2e6; --navy-soft: #1f2a3d; --gold: #f0c14e; --gold-soft: #3a3020; --gold-ink: #f6d98a;
+    --on-navy: #0f141c; --shadow: none;
+  }
+
+  [hidden] { display: none !important; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.5; }
+  .wrap { max-width: 560px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 40px; display: grid; gap: 20px; }
+
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  h1 { font-family: var(--display); font-size: clamp(30px, 8vw, 40px); line-height: 1.08; margin: 6px 0 10px; text-wrap: balance; letter-spacing: -.01em; }
+  h1 .hl { background: linear-gradient(transparent 62%, var(--gold-soft) 62%); }
+  .lede { margin: 0; color: var(--muted); max-width: 60ch; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); display: grid; gap: 16px; }
+  h2 { font-family: var(--display); font-size: 20px; margin: 0; text-wrap: balance; }
+
+  .steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; counter-reset: s; }
+  .steps li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; }
+  .steps li::before { counter-increment: s; content: counter(s); font-family: var(--mono); font-weight: 600; font-size: 13px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--navy-soft); color: var(--navy); margin-top: 1px; }
+
+  .btn { font: 700 17px/1 var(--body); border: 0; border-radius: 12px; padding: 16px 20px; min-height: 52px; cursor: pointer; background: var(--navy); color: var(--on-navy); width: 100%; }
+  .btn.secondary { background: var(--navy-soft); color: var(--navy); }
+  .btn:focus-visible, textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .timer { display: grid; gap: 8px; }
+  .timer-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .timer-label { font-size: 14px; color: var(--muted); }
+  .secs { font-family: var(--mono); font-weight: 600; font-size: 22px; font-variant-numeric: tabular-nums; }
+  .track { height: 8px; border-radius: 99px; background: var(--navy-soft); overflow: hidden; }
+  .fill { height: 100%; width: 100%; background: var(--gold); border-radius: 99px; transform-origin: left; }
+
+  .words { font-family: var(--mono); font-weight: 500; font-size: 17px; line-height: 1.9; margin: 0; padding: 14px 16px; background: var(--navy-soft); border-radius: 12px; word-spacing: .35em; overflow-wrap: anywhere; }
+  label.small { font-size: 14px; color: var(--muted); }
+  textarea { width: 100%; box-sizing: border-box; min-height: 120px; resize: vertical; font: 500 17px/1.5 var(--mono); color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  textarea:disabled { opacity: .7; }
+
+  .result-head { display: grid; gap: 4px; }
+  .result-head p { margin: 0; color: var(--muted); }
+  .metric { display: grid; gap: 8px; padding-block: 12px; border-top: 1px solid var(--line); }
+  .metric-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .metric-name { font-weight: 700; }
+  .metric-name small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+  .bars { display: grid; gap: 6px; }
+  .bar-row { display: grid; grid-template-columns: 86px 1fr 56px; gap: 10px; align-items: center; font-size: 14px; }
+  .bar-row .who { color: var(--muted); }
+  .bar-row .val { font-family: var(--mono); font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+  .bar { height: 12px; border-radius: 6px; background: var(--navy-soft); overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 6px; }
+  .bar.you i { background: var(--gold); }
+  .bar.them i { background: var(--navy); }
+  .verdict { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--gold-soft); color: var(--gold-ink); font-weight: 700; }
+
+  .bench { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stat { background: var(--navy-soft); border-radius: 12px; padding: 12px; display: grid; gap: 2px; }
+  .stat b { font-family: var(--display); font-size: 24px; color: var(--navy); font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13px; color: var(--muted); line-height: 1.3; }
+  .note { margin: 0; font-size: 14px; color: var(--muted); }
+
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; }
+  footer p { margin: 0; }
+
+  @media (max-width: 380px) { .bench { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header>
+    <p class="eyebrow">BrainConnects 2026 · poster demo</p>
+    <h1>Can you <span class="hl">text</span> as well as our participants?</h1>
+    <p class="lede">In our study, midlife adults copied words on their phones while walking a 6&nbsp;m course. Try the same 30-second texting task and see how you compare.</p>
+  </header>
+
+  <section class="card" id="intro" aria-labelledby="intro-h">
+    <h2 id="intro-h">How it works</h2>
+    <ol class="steps">
+      <li><span>Tap <b>Start</b> to see a list of 25 five-letter words.</span></li>
+      <li><span>Type the words in order, separated by spaces. The 30-second timer starts with your first letter.</span></li>
+      <li><span>We score it the way the study did: words typed correctly and in order.</span></li>
+    </ol>
+    <button class="btn" id="startBtn" type="button">Start</button>
+    <p class="note">For the full experience, walk on the spot while you type.</p>
+  </section>
+
+  <section class="card" id="run" hidden aria-labelledby="run-h">
+    <h2 id="run-h" class="sr">Type these words</h2>
+    <div class="timer">
+      <div class="timer-row">
+        <span class="timer-label" id="timerLabel">Timer starts when you type</span>
+        <span class="secs" id="secs">30.0 s</span>
+      </div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+    </div>
+    <p class="words" id="words"></p>
+    <label class="small" for="typing">Type here</label>
+    <textarea id="typing" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text"></textarea>
+  </section>
+
+  <section class="card" id="done" hidden aria-labelledby="done-h" aria-live="polite">
+    <div class="result-head">
+      <h2 id="done-h">Your result</h2>
+      <p id="summary"></p>
+    </div>
+    <div id="metrics"></div>
+    <p class="verdict" id="verdict"></p>
+    <button class="btn" id="againBtn" type="button">Try a new word list</button>
+  </section>
+
+  <section class="card" aria-labelledby="bench-h">
+    <h2 id="bench-h">Our participants, texting while walking</h2>
+    <div class="bench">
+      <div class="stat"><b>21.1</b><span>correct words per minute</span></div>
+      <div class="stat"><b>88.7%</b><span>of typed words correct</span></div>
+      <div class="stat"><b>27.6</b><span>typing speed (WPM)</span></div>
+    </div>
+    <p class="note">Averages from 47 midlife adults (mean age 51.9) in the CHARM study, texting while walking. Their gait speed also dropped by about a quarter.</p>
+  </section>
+
+  <footer>
+    <p>From the poster <i>Cognitive Reserve &amp; the Cost of Multitasking: Preliminary fNIRS Insights into Dual-Task Walking</i> by Clara Xinru Tan, National Institute of Education, NTU, Singapore.</p>
+    <p>Just for fun, not a clinical test. You are probably standing still; our participants were walking. Nothing you type leaves your phone.</p>
+  </footer>
+</main>
+
+<script>
+(() => {
+  const LISTS = [
+    "apple beach chair dance eagle fable grape heart igloo jolly kiosk lucky mango north ocean piano quick robin sunny tiger under vocal water yacht zebra",
+    "bread candy dream earth flute globe honey ivory jelly koala lilac merry noble olive pearl queen radio salad table ultra vapor wheat youth zesty badge",
+    "basin cabin daisy ember frame gecko happy index juice karma laser metal nurse orbit paint quilt rainy sugar toast video waltz yummy zippy crisp dough"
+  ].map(s => s.split(" "));
+  const COHORT = { cwpm: 21.1, acc: 88.7, wpm: 27.6 };
+  const DURATION = 30000;
+
+  const $ = id => document.getElementById(id);
+  const intro = $("intro"), run = $("run"), done = $("done");
+  const wordsEl = $("words"), typing = $("typing"), secs = $("secs"), fill = $("fill"), timerLabel = $("timerLabel");
+
+  let listIdx = -1, target = [], t0 = 0, raf = 0, running = false, finished = false;
+
+  function tokens(s) { return (s.toLowerCase().replace(/\./g, " ").match(/[a-z0-9]+/g)) || []; }
+  function lcs(a, b) {
+    const dp = Array(b.length + 1).fill(0);
+    for (let i = 1; i <= a.length; i++) {
+      let prev = 0;
+      for (let j = 1; j <= b.length; j++) {
+        const tmp = dp[j];
+        dp[j] = a[i - 1] === b[j - 1] ? prev + 1 : Math.max(dp[j], dp[j - 1]);
+        prev = tmp;
+      }
+    }
+    return dp[b.length];
+  }
+  function score(text) {
+    const t = tokens(text);
+    const correct = lcs(t, target);
+    const chars = text.replace(/\s+/g, " ").trim().length;
+    return {
+      typed: t.length,
+      correct,
+      cwpm: correct / (DURATION / 60000),
+      acc: t.length ? correct / t.length * 100 : 0,
+      wpm: Math.max(0, chars - 1) / (DURATION / 1000) * 60 / 5
+    };
+  }
+
+  function start() {
+    listIdx = (listIdx + 1 + Math.floor(Math.random() * (LISTS.length - 1))) % LISTS.length;
+    target = LISTS[listIdx];
+    wordsEl.textContent = target.join(" ");
+    typing.value = ""; typing.disabled = false;
+    running = false; finished = false;
+    secs.textContent = "30.0 s"; fill.style.transform = "scaleX(1)";
+    timerLabel.textContent = "Timer starts when you type";
+    intro.hidden = true; done.hidden = true; run.hidden = false;
+    typing.focus();
+    run.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+
+  function tick() {
+    const left = Math.max(0, DURATION - (performance.now() - t0));
+    secs.textContent = (left / 1000).toFixed(1) + " s";
+    fill.style.transform = "scaleX(" + (left / DURATION) + ")";
+    if (left <= 0) { finish(); return; }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function finish() {
+    if (finished) return;
+    finished = true; running = false; cancelAnimationFrame(raf);
+    typing.disabled = true; typing.blur();
+    const r = score(typing.value);
+    render(r);
+    run.hidden = true; done.hidden = false;
+    done.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+
+  function barRow(who, cls, val, max, fmt) {
+    const pct = Math.max(0, Math.min(100, val / max * 100));
+    return '<div class="bar-row"><span class="who">' + who + '</span><div class="bar ' + cls + '"><i style="width:' + pct.toFixed(1) + '%"></i></div><span class="val">' + fmt(val) + '</span></div>';
+  }
+  function metric(name, sub, you, them, max, fmt) {
+    return '<div class="metric"><div class="metric-top"><span class="metric-name">' + name + '<small>' + sub + '</small></span></div><div class="bars">' +
+      barRow("You", "you", you, max, fmt) + barRow("Participants", "them", them, max, fmt) + '</div></div>';
+  }
+
+  function render(r) {
+    const one = v => v.toFixed(1);
+    $("summary").textContent = r.typed
+      ? "You typed " + r.typed + " word" + (r.typed === 1 ? "" : "s") + " in 30 seconds, " + r.correct + " of them correct and in order."
+      : "No words were typed. Tap below to try again.";
+    const maxC = Math.max(r.cwpm, COHORT.cwpm) * 1.15, maxW = Math.max(r.wpm, COHORT.wpm) * 1.15;
+    $("metrics").innerHTML =
+      metric("Correct words per minute", "words typed correctly and in order", r.cwpm, COHORT.cwpm, maxC, one) +
+      metric("Accuracy", "share of typed words that were correct", r.acc, COHORT.acc, 100, v => v.toFixed(0) + "%") +
+      metric("Typing speed", "words per minute, 5 characters = 1 word", r.wpm, COHORT.wpm, maxW, one);
+    let v;
+    if (!r.typed) v = "Our participants managed about 10 correct words in the same 30 seconds, while walking.";
+    else if (r.cwpm >= COHORT.cwpm) v = "You beat our participants' average. Now try again while walking on the spot, as they did.";
+    else v = "Our participants averaged " + COHORT.cwpm.toFixed(1) + " correct words per minute while walking. Texting on the move is harder than it looks.";
+    $("verdict").textContent = v;
+  }
+
+  typing.addEventListener("input", () => {
+    if (!running && !finished && typing.value.trim().length) {
+      running = true; t0 = performance.now();
+      timerLabel.textContent = "Time left";
+      raf = requestAnimationFrame(tick);
+    }
+  });
+  typing.addEventListener("paste", e => e.preventDefault());
+  $("startBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
+})();
+</script>
+
+</body>
+</html>
